@@ -1,4 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.stylegenerator.plugin'
+
+styleGenerator {
+    parentStyle = 'TextAppearance.AppCompat'
+
+    minTextSize = 10
+    maxTextSize = 12
+}
 
 android {
     compileSdkVersion 27
