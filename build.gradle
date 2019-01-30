@@ -9,6 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20'
         //classpath 'com.github.dorukkangal:style-generator:1.0.0'
         classpath files('plugin/build/libs/plugin.jar')
     }
