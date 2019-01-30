@@ -20,6 +20,7 @@ internal class StyleGenerator(
         private val fontNames: List<String> = emptyList(),
         private val colorNames: List<String> = emptyList(),
         private val parentStyle: String,
+        private val generateUnusedStyles: Boolean,
         private val minTextSize: Int,
         private val maxTextSize: Int
 ) {
@@ -51,24 +52,41 @@ internal class StyleGenerator(
 
         for (fontName in fontNames) {
 
-            // Add comment
-            elementRoot.addComment(doc, "${StringUtil.convertCamelCase(fontName)} Styles")
-                    .addLineBreak(doc)
+            if (generateUnusedStyles || isStyleUsed(fontName)) {
 
-            createStyle(fontName)
+                // Add comment
+                elementRoot.addComment(doc, "${StringUtil.convertCamelCase(fontName)} Styles")
+                        .addLineBreak(doc)
 
-            for (colorName in colorNames) {
+                createStyle(fontName)
 
-                createStyle(fontName, colorName)
+                for (colorName in colorNames) {
 
-                for (textSize in minTextSize..maxTextSize) {
+                    if (generateUnusedStyles || isStyleUsed(fontName, colorName)) {
 
-                    createStyle(fontName, colorName, textSize)
+                        createStyle(fontName, colorName)
+
+                        for (textSize in minTextSize..maxTextSize) {
+
+                            if (generateUnusedStyles || isStyleUsed(fontName, colorName, textSize)) {
+
+                                createStyle(fontName, colorName, textSize)
+                            }
+                        }
+                    }
                 }
             }
         }
 
         createFile(doc)
+    }
+
+    private fun isStyleUsed(vararg styleNameParams: Any): Boolean {
+        return FileUtil.contains(
+                projectPath,
+                StyleUtil.getStyleName(*styleNameParams),
+                StyleUtil.getStyleName(*styleNameParams, separator = "_")
+        )
     }
 
     private fun createStyle(fontName: String) {

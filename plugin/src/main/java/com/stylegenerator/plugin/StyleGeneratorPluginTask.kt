@@ -24,9 +24,9 @@ open class StyleGeneratorPluginTask : DefaultTask() {
                     fontNames = ResourceReader.getFontNames(projectPath),
                     colorNames = ResourceReader.getColorNames(projectPath),
                     parentStyle = extension.parentStyle,
+                    generateUnusedStyles = extension.generateUnusedStyles,
                     minTextSize = extension.minTextSize,
                     maxTextSize = extension.maxTextSize
-
             ).generateResources()
         } catch (e: Exception) {
             e.printStackTrace()

@@ -11,6 +11,8 @@ open class StyleGeneratorPluginExtension {
 
     var parentStyle = "TextAppearance.AppCompat"
 
+    var generateUnusedStyles = false
+
     var minTextSize = 8
     var maxTextSize = 32
 }

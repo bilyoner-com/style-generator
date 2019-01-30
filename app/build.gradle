@@ -6,6 +6,8 @@ styleGenerator {
 
     minTextSize = 10
     maxTextSize = 12
+
+    generateUnusedStyles = false
 }
 
 android {
