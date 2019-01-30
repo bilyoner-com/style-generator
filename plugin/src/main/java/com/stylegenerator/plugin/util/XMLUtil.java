@@ -20,9 +20,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public final class XMLHelper {
+public final class XMLUtil {
 
-    private XMLHelper() {
+    private XMLUtil() {
     }
 
     public static void writeToFile(Document doc, File file) throws TransformerException {
@@ -41,7 +41,7 @@ public final class XMLHelper {
         Map<String, String> foundResources = new HashMap<>();
 
         try {
-            Document doc = XMLHelper.getDocument(inputFile);
+            Document doc = XMLUtil.getDocument(inputFile);
             doc.getDocumentElement().normalize();
             NodeList stringNodes = doc.getElementsByTagName(tag);
 

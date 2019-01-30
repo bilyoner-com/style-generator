@@ -1,7 +1,7 @@
 package com.stylegenerator.plugin;
 
 import com.stylegenerator.plugin.util.StringUtil;
-import com.stylegenerator.plugin.util.XMLHelper;
+import com.stylegenerator.plugin.util.XMLUtil;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -67,7 +67,7 @@ class StyleGenerator {
      * Method to generate style definitions based on given fonts, colors and text sizes.
      */
     void generateResources() throws Exception {
-        doc = XMLHelper.newDocument();
+        doc = XMLUtil.newDocument();
 
         elementRoot = doc.createElement(TAG_RESOURCE);
         doc.appendChild(elementRoot);
@@ -181,7 +181,7 @@ class StyleGenerator {
 
         final String fileName = outputDir.getPath() + File.separator + STYLE_FILE_NAME;
 
-        XMLHelper.writeToFile(doc, new File(fileName));
+        XMLUtil.writeToFile(doc, new File(fileName));
     }
 
     private enum ItemTagType {

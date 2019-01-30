@@ -32,7 +32,7 @@ public final class ResourceReader {
     }
 
     public static List<String> getColorNames() {
-        Map<String, String> colors = XMLHelper.readFromXML(new File(COLORS_FILE), "color");
+        Map<String, String> colors = XMLUtil.readFromXML(new File(COLORS_FILE), "color");
         return new ArrayList<>(colors.keySet());
     }
 }
