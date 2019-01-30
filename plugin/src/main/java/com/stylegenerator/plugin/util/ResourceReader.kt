@@ -1,6 +1,5 @@
 package com.stylegenerator.plugin.util
 
-import java.io.File
 import java.util.ArrayList
 
 object ResourceReader {
@@ -10,9 +9,8 @@ object ResourceReader {
 
     private const val EXTENSION_SEPARATOR = "."
 
-    fun getFontNames(): List<String> {
-
-        val fonts = File(FONTS_FOLDER).list()
+    fun getFontNames(path: String): List<String> {
+        val fonts = FileUtil.getFile(path, FONTS_FOLDER).list()
         return when {
             fonts.isNullOrEmpty() -> emptyList()
             else -> fonts.map { filename ->
@@ -21,8 +19,8 @@ object ResourceReader {
         }
     }
 
-    fun getColorNames(): List<String> {
-        val colors = XMLUtil.readFromXML(File(COLORS_FILE), "color")
+    fun getColorNames(path: String): List<String> {
+        val colors = XMLUtil.readFromXML(FileUtil.getFile(path, COLORS_FILE), "color")
         return ArrayList(colors.keys)
     }
 }

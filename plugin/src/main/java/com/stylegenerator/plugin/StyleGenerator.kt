@@ -1,17 +1,17 @@
 package com.stylegenerator.plugin
 
+import com.stylegenerator.plugin.util.FileUtil
 import com.stylegenerator.plugin.util.StringUtil
 import com.stylegenerator.plugin.util.XMLUtil
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.io.File
 import java.util.Arrays
 import javax.xml.transform.TransformerException
 
 /**
  * Class to create style file.
  */
-internal class StyleGenerator(private val outputDir: File,
+internal class StyleGenerator(private val projectPath: String,
                               private val fontNames: List<String> = emptyList(),
                               private val colorNames: List<String> = emptyList(),
                               private val parentStyle: String,
@@ -138,9 +138,9 @@ internal class StyleGenerator(private val outputDir: File,
     @Throws(TransformerException::class)
     private fun createFile(doc: Document) {
 
-        val fileName = outputDir.path + File.separator + STYLE_FILE_NAME
+        val file = FileUtil.getFile(projectPath, OUTPUT_DIR, STYLE_FILE_NAME)
 
-        XMLUtil.writeToFile(doc, File(fileName))
+        XMLUtil.writeToFile(doc, file)
     }
 
     private enum class ItemTagType {
@@ -150,6 +150,8 @@ internal class StyleGenerator(private val outputDir: File,
     }
 
     companion object {
+        private const val OUTPUT_DIR = "src/main/res/values"
+
         private const val STYLE_FILE_NAME = "styles_text_appearance.xml"
 
         private const val STYLE_NAME_PREFIX = "TextStyle"

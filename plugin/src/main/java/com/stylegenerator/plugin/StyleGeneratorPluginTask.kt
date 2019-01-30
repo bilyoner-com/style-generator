@@ -14,17 +14,19 @@ open class StyleGeneratorPluginTask : DefaultTask() {
 
         val extension = project.extensions
                 .findByType(StyleGeneratorPluginExtension::class.java)
+                ?: StyleGeneratorPluginExtension.DEFAULT
 
-        val outputDirectory = project.file("src/main/res/values")
+        val projectPath = project.projectDir.path
 
         try {
             StyleGenerator(
-                    outputDirectory,
-                    ResourceReader.getFontNames(),
-                    ResourceReader.getColorNames(),
-                    extension!!.parentStyle,
-                    extension.minTextSize,
-                    extension.maxTextSize
+                    projectPath = projectPath,
+                    fontNames = ResourceReader.getFontNames(projectPath),
+                    colorNames = ResourceReader.getColorNames(projectPath),
+                    parentStyle = extension.parentStyle,
+                    minTextSize = extension.minTextSize,
+                    maxTextSize = extension.maxTextSize
+
             ).generateResources()
         } catch (e: Exception) {
             e.printStackTrace()

@@ -5,6 +5,10 @@ package com.stylegenerator.plugin
  */
 open class StyleGeneratorPluginExtension {
 
+    companion object {
+        val DEFAULT = StyleGeneratorPluginExtension()
+    }
+
     var parentStyle = "TextAppearance.AppCompat"
 
     var minTextSize = 8
