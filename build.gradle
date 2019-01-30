@@ -9,11 +9,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
-        classpath 'com.github.dorukkangal:style-generator:1.0.0'
-        //classpath files('plugin/build/libs/plugin.jar')
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        //classpath 'com.github.dorukkangal:style-generator:1.0.0'
+        classpath files('plugin/build/libs/plugin.jar')
     }
 }
 
