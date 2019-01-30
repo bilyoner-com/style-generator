@@ -17,7 +17,7 @@ import javax.xml.transform.TransformerException;
  * Class to create style file.
  */
 class StyleGenerator {
-    private static final String STYLE_FILE_NAME = "style_text_appearance.xml";
+    private static final String STYLE_FILE_NAME = "styles_text_appearance.xml";
 
     private static final String STYLE_NAME_PREFIX = "TextStyle";
 
