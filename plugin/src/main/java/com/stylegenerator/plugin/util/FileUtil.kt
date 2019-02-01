@@ -14,19 +14,23 @@ object FileUtil {
         return paths.joinToString(SEPARATOR)
     }
 
-    fun contains(fileName: String, vararg texts: String): Boolean {
-        return FileUtil.contains(getFile(fileName), *texts)
+    fun contains(fileName: String, vararg texts: String, fileFilter: (File) -> Boolean): Boolean {
+        return FileUtil.contains(getFile(fileName), *texts, fileFilter = fileFilter)
     }
 
-    fun contains(file: File, vararg texts: String): Boolean {
+    fun contains(file: File, vararg texts: String, fileFilter: (File) -> Boolean): Boolean {
         val subFiles = file.listFiles()
         subFiles?.let {
 
             for (subFile in subFiles) {
 
+                if (fileFilter.invoke(subFile)) {
+                    continue
+                }
+
                 when (subFile.isDirectory) {
                     true -> {
-                        if (contains(subFile, *texts)) {
+                        if (contains(subFile, *texts, fileFilter = fileFilter)) {
                             return true
                         }
                     }

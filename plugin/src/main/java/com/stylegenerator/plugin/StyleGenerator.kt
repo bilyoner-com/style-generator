@@ -10,6 +10,7 @@ import com.stylegenerator.plugin.util.addElement
 import com.stylegenerator.plugin.util.addLineBreak
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import java.io.File
 import javax.xml.transform.TransformerException
 
 /**
@@ -27,6 +28,16 @@ internal class StyleGenerator(
 
     private lateinit var doc: Document
     private lateinit var elementRoot: Element
+
+    private val fileNameFilter: (File) -> Boolean = { file ->
+        if (file.isDirectory) {
+            file.name.contains("build")
+        } else {
+            !file.name.contains(".java")
+                    && !file.name.contains(".kt")
+                    && !file.name.contains(".xml")
+        }
+    }
 
     /**
      * Method to generate style definitions based on given fonts, colors and text sizes.
@@ -85,7 +96,8 @@ internal class StyleGenerator(
         return FileUtil.contains(
                 projectPath,
                 StyleUtil.getStyleName(*styleNameParams),
-                StyleUtil.getStyleName(*styleNameParams, separator = "_")
+                StyleUtil.getStyleName(*styleNameParams, separator = "_"),
+                fileFilter = fileNameFilter
         )
     }
 
