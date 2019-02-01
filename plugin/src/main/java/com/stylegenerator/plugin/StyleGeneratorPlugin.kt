@@ -12,8 +12,10 @@ class StyleGeneratorPlugin : Plugin<Project> {
 
         try {
             project.extensions.create("styleGenerator", StyleGeneratorPluginExtension::class.java)
-            project.tasks.create("generateStyle", StyleGeneratorPluginTask::class.java)
+            val generateStyleTask = project.tasks.create("generateStyle", StyleGeneratorPluginTask::class.java)
 
+            val cleanTask = project.tasks.getByName("clean")
+            generateStyleTask.dependsOn(cleanTask)
         } catch (e: Exception) {
             e.printStackTrace()
             throw e
