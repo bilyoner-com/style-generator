@@ -1,6 +1,8 @@
 package com.stylegenerator.plugin.util
 
 import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
 import org.xml.sax.SAXException
 import java.io.File
 import java.io.IOException
@@ -61,5 +63,40 @@ object XMLUtil {
                 .newDocumentBuilder()
         return documentBuilder.parse(file)
     }
+}
 
+fun Document.addElement(elementName: String, append: Boolean = true): Element {
+    return createElement(elementName).also {
+        if (append) {
+            appendChild(it)
+        }
+    }
+}
+
+fun Element.addElement(doc: Document, elementName: String, append: Boolean = false): Element {
+    return doc.createElement(elementName).also {
+        if (append) {
+            appendChild(it)
+        }
+    }
+}
+
+fun Element.addElement(child: Node): Element {
+    appendChild(child)
+    return this
+}
+
+fun Element.addComment(doc: Document, comment: String): Element {
+    appendChild(doc.createComment(comment))
+    return this
+}
+
+fun Element.addLineBreak(doc: Document): Element {
+    appendChild(doc.createTextNode("\n\n    "))
+    return this
+}
+
+fun Element.addAttribute(name: String, value: String): Element {
+    setAttribute(name, value)
+    return this
 }
