@@ -26,6 +26,10 @@ internal class StyleGenerator(private val projectPath: String,
      */
     @Throws(Exception::class)
     fun generateResources() {
+        // Remove old generated file
+        val file = FileUtil.getFile(projectPath, OUTPUT_DIR, STYLE_FILE_NAME)
+        file.delete()
+
         doc = XMLUtil.newDocument()
 
         elementRoot = doc.createElement(TAG_RESOURCE)
