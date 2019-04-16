@@ -2,14 +2,14 @@
 Style-Generator is a Gradle plugin to generate style definitions.
 
 ## Download
-Latest version: [![](https://jitpack.io/v/dorukkangal/style-generator.svg)](https://jitpack.io/#dorukkangal/style-generator)
+Latest version: [![](https://jitpack.io/v/bilyoner-com/style-generator.svg)](https://jitpack.io/#bilyoner-com/style-generator)
 
 ```groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    classpath 'com.github.dorukkangal:style-generator:1.0.0'
+    classpath 'com.github.bilyoner-com:style-generator:1.2.0'
 }
 ```
 
